@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Plan your Maharashtra trip easily. Explore cities, tourist places, and create travel itineraries.">
+    <meta name="keywords" content="Maharashtra tourism, travel planner, tourist places, trip planning">
+    <meta name="author" content="Krushna Bhavsar">
+
+    <title>Maharashtra Tourism Planner</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo.png" type="image/png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Maharashtra Tourism</div>
+            <button class="plan-btn" onclick="scrollToPlanner()">Plan Your Trip</button>
+        </nav>
+        <section class="hero">
+            <div class="carousel" id="hero-carousel">
+                <div class="carousel-slide active">
+                    <img src="images/mumbai.jpg" alt="Gateway of India, Mumbai">
+                    <div class="carousel-caption">
+                        <h1>Gateway of India</h1>
+                        <p>Iconic monument by the Arabian Sea, Mumbai</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/marine_drive.jpg" alt="Marine Drive, Mumbai">
+                    <div class="carousel-caption">
+                        <h1>Marine Drive</h1>
+                        <p>Scenic promenade, perfect for sunset walks</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/shaniwarwada.jpg" alt="Shaniwar Wada, Pune">
+                    <div class="carousel-caption">
+                        <h1>Shaniwar Wada</h1>
+                        <p>Historic fortification in Pune</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/trimbak.jpg" alt="Trimbakeshwar, Nashik">
+                    <div class="carousel-caption">
+                        <h1>Trimbakeshwar Temple</h1>
+                        <p>One of the twelve Jyotirlingas, Nashik</p>
+                    </div>
+                </div>
+                <button class="carousel-btn prev" onclick="carouselPrev()">&#10094;</button>
+                <button class="carousel-btn next" onclick="carouselNext()">&#10095;</button>
+            </div>
+        </section>
+    </header>
+    <main>
+        <section class="intro">
+    <h2>Welcome to Maharashtra</h2>
+    <p>
+        Discover the diverse beauty of Maharashtra – a state known for its rich history,
+        vibrant cities, scenic landscapes, and spiritual destinations. From the iconic
+        Gateway of India in Mumbai to the sacred Trimbakeshwar Temple in Nashik,
+        every corner offers a unique experience.
+    </p>
+
+    <p>
+        Use our smart trip planner to customize your journey based on your interests,
+        duration, and budget. Whether you love beaches, forts, nature, or adventure,
+        we help you plan a memorable trip with ease.
+    </p>
+</section>
+        <section class="trip-planner" id="trip-planner">
+            <h2>Plan Your Trip</h2>
+            <form id="planner-form">
+                <div class="form-group">
+                    <label for="city">Select City</label>
+                    <select id="city" required>
+                        <option value="">--Choose City--</option>
+                        <option>Mumbai</option>
+                        <option>Pune</option>
+                        <option>Nashik</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tourism Categories</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" value="Religious"> Religious</label>
+                        <label><input type="checkbox" value="Historical"> Historical</label>
+                        <label><input type="checkbox" value="Nature"> Nature</label>
+                        <label><input type="checkbox" value="Adventure"> Adventure</label>
+                        <label><input type="checkbox" value="Entertainment"> Entertainment</label>
+                        <label><input type="checkbox" value="Beaches"> Beaches</label>
+                        <label><input type="checkbox" value="Wildlife"> Wildlife</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="days">Number of Days</label>
+                    <input type="number" id="days" min="1" max="14" value="3" required>
+                </div>
+                <div class="form-group">
+                    <label for="budget">Budget</label>
+                    <select id="budget" required>
+                        <option value="">--Select Budget--</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <button type="submit">Get Recommendations</button>
+            </form>
+        </section>
+        <section class="recommendations" id="recommendations">
+            <!-- Recommendations will be rendered here -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Maharashtra Tourism. All rights reserved.</p>
+    </footer>
+    <script src="app.js"></script>
+</body>
+</html>
