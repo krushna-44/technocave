@@ -265,3 +265,25 @@ function showRecommendations(city, categories, days, budget) {
   const i = new Image();
   i.src = `images/${img}`;
 });
+
+fetch("maharashtraData.json")
+  .then(res => res.json())
+  .then(data => {
+    console.log("DATA LOADED:", data);
+  })
+  .catch(err => console.error("ERROR:", err));
+
+  fetch("maharashtraData.json")
+  .then(res => res.json())
+  .then(data => {
+    let container = document.getElementById("places");
+
+    data.categories.popular_places.forEach(place => {
+      container.innerHTML += `
+        <div>
+          <h2>${place.name}</h2>
+          <p>${place.short_description}</p>
+        </div>
+      `;
+    });
+  });
