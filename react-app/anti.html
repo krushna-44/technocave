@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Plan your Maharashtra trip easily. Explore cities, tourist places, and create travel itineraries." />
+    <title>Maharashtra Tourism Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        :root {
+            --primary: #1e3a5c;
+            --accent: #f9b233;
+            --bg: #f5f7fa;
+            --card-bg: #fff;
+            --text: #222;
+            --muted: #666;
+            --radius: 18px;
+            --shadow: 0 4px 24px rgba(30, 58, 92, 0.10);
+            --font: 'Montserrat', Arial, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body,
+        #root {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 8vw;
+            background: var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 16px rgba(30, 58, 92, 0.18);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .nav-search {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 6px 14px;
+            gap: 8px;
+        }
+
+        .nav-search input {
+            background: none;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-family: var(--font);
+            font-size: 0.9rem;
+            width: 160px;
+        }
+
+        .nav-search input::placeholder {
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        .nav-search i {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+        }
+
+        .plan-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            padding: 9px 22px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: background 0.2s, transform 0.15s;
+            white-space: nowrap;
+        }
+
+        .plan-btn:hover {
+            background: #e09e1b;
+            transform: translateY(-2px);
+        }
+
+        .nav-icon-btn {
+            background: rgba(255, 255, 255, 0.12);
+            border: none;
+            color: #fff;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .nav-icon-btn:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .dots-wrap {
+            position: relative;
+        }
+
+        .dropdown {
+            position: absolute;
+            right: 0;
+            top: calc(100% + 8px);
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(30, 58, 92, 0.18);
+            min-width: 140px;
+            overflow: hidden;
+            z-index: 200;
+            animation: fadeDown 0.18s ease;
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 11px 18px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background 0.15s;
+        }
+
+        .dropdown a:hover {
+            background: #f5f7fa;
+            color: var(--accent);
+        }
+
+        /* CAROUSEL */
+        .carousel-wrap {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            overflow: hidden;
+            background: #111;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            filter: brightness(0.62) saturate(1.1);
+            display: block;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            left: 6vw;
+            bottom: 64px;
+            color: #fff;
+            background: rgba(30, 58, 92, 0.72);
+            padding: 28px 36px 22px;
+            border-radius: 0 32px 32px 0;
+            backdrop-filter: blur(4px);
+            animation: captionIn 0.8s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .carousel-caption h1 {
+            font-size: 2.4rem;
+            margin: 0 0 8px;
+            font-weight: 800;
+            text-shadow: 0 2px 12px #0008;
+        }
+
+        .carousel-caption p {
+            font-size: 1.1rem;
+            margin: 0;
+            color: #ffe6b0;
+        }
+
+        @keyframes captionIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(30, 58, 92, 0.65);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 46px;
+            height: 46px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: var(--accent);
+        }
+
+        .carousel-btn.prev {
+            left: 18px;
+        }
+
+        .carousel-btn.next {
+            right: 18px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.45);
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        /* INTRO */
+        .intro {
+            text-align: center;
+            padding: 56px 8vw 28px;
+        }
+
+        .intro h2 {
+            font-size: 2.2rem;
+            margin-bottom: 14px;
+            color: var(--primary);
+        }
+
+        .intro p {
+            color: var(--muted);
+            font-size: 1.08rem;
+            max-width: 720px;
+            margin: 0 auto 12px;
+            line-height: 1.7;
+        }
+
+        /* STATS BAR */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding: 0 8vw 40px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        /* PLANNER */
+        .trip-planner {
+            background: #fff;
+            margin: 0 auto 40px;
+            max-width: 760px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 36px 32px 28px;
+        }
+
+        .trip-planner h2 {
+            text-align: center;
+            margin-bottom: 28px;
+            color: var(--primary);
+            font-size: 1.7rem;
+        }
+
+        .planner-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .form-group {
+            flex: 1 1 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
+        }
+
+        select,
+        input[type="number"] {
+            padding: 11px 14px;
+            border-radius: 12px;
+            border: 1.5px solid #dde3ec;
+            font-size: 1rem;
+            font-family: var(--font);
+            background: #f8fafc;
+            transition: border 0.2s;
+            outline: none;
+        }
+
+        select:focus,
+        input[type="number"]:focus {
+            border-color: var(--accent);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 14px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1.5px solid #dde3ec;
+            background: #f8fafc;
+            transition: all 0.15s;
+        }
+
+        .checkbox-group label:has(input:checked) {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .checkbox-group input {
+            display: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 8px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            background: #16304a;
+            transform: translateY(-2px);
+        }
+
+        /* RECOMMENDATIONS */
+        .recommendations {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 4vw 60px;
+        }
+
+        .rec-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .rec-header h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .rec-header p {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+            margin-bottom: 36px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 36px rgba(30, 58, 92, 0.16);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .card-img-placeholder {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #1e3a5c22, #f9b23322);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .card-content {
+            padding: 18px;
+            flex: 1;
+        }
+
+        .card-content h3 {
+            margin: 0 0 8px;
+            font-size: 1.15rem;
+            color: var(--primary);
+        }
+
+        .card-content p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin: 0 0 12px;
+            line-height: 1.5;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            padding: 2px 10px;
+            margin: 2px 3px 2px 0;
+            font-weight: 600;
+        }
+
+        .cost-tag {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            padding: 3px 10px;
+            font-weight: 600;
+        }
+
+        /* ITINERARY */
+        .itinerary-section {
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 28px 28px 20px;
+            margin-bottom: 28px;
+        }
+
+        .itinerary-section h3 {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+
+        .itinerary-day {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .itinerary-day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-badge {
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .day-places {
+            font-size: 0.97rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* BUDGET */
+        .budget-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .budget-tips {
+            background: #fffbf0;
+            border-left: 5px solid var(--accent);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 20px 22px;
+        }
+
+        .budget-tips h4 {
+            margin: 0 0 12px;
+            color: #7a5a00;
+            font-size: 1rem;
+        }
+
+        .budget-tips ul {
+            margin: 0;
+            padding-left: 18px;
+            color: #7a5a00;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .cost-card {
+            background: var(--primary);
+            color: #fff;
+            border-radius: var(--radius);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .cost-card .amount {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .cost-card .cost-label {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-top: 6px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary);
+            color: #fff;
+            text-align: center;
+            padding: 28px 0 16px;
+        }
+
+        footer p {
+            margin: 4px 0;
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 14px;
+        }
+
+        footer .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* EXPLORE BTN */
+        .explore-btn {
+            position: absolute;
+            bottom: 52px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 13px 36px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: background 0.2s, transform 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .explore-btn:hover {
+            background: #e09e1b;
+            transform: translateX(-50%) translateY(-3px);
+        }
+
+        /* PAGE TRANSITION */
+        .page {
+            animation: pageIn 0.35s ease;
+        }
+
+        @keyframes pageIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CITY CARDS */
+        .city-page {
+            padding: 60px 8vw;
+            text-align: center;
+        }
+
+        .city-page h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 36px;
+        }
+
+        .city-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 28px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .city-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: var(--card-bg);
+        }
+
+        .city-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(30, 58, 92, 0.18);
+        }
+
+        .city-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .city-card-name {
+            padding: 16px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .back-btn {
+            background: none;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 28px;
+            transition: all 0.2s;
+            font-family: var(--font);
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        @media (max-width: 700px) {
+
+            .carousel-wrap,
+            .carousel-slide img {
+                height: 300px;
+            }
+
+            .carousel-caption h1 {
+                font-size: 1.5rem;
+            }
+
+            .carousel-caption {
+                padding: 16px 18px;
+            }
+
+            .budget-section {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 12px 4vw;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .trip-planner {
+                padding: 20px 12px;
+            }
+
+            .nav-search input {
+                width: 90px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // ── Data ──────────────────────────────────────────────────────────────────
+        const slides = [
+            { img: "../images/mumbai.jpg", title: "Gateway of India", sub: "Iconic monument by the Arabian Sea, Mumbai" },
+            { img: "../images/marine_drive.jpg", title: "Marine Drive", sub: "Scenic promenade, perfect for sunset walks" },
+            { img: "../images/shaniwarwada.jpg", title: "Shaniwar Wada", sub: "Historic fortification in Pune" },
+            { img: "../images/trimbak.jpg", title: "Trimbakeshwar Temple", sub: "One of the twelve Jyotirlingas, Nashik" },
+        ];
+
+        const placesData = [
+            { city: "Mumbai", name: "Gateway of India", category: ["Historical", "Entertainment"], icon: "🏛️", description: "Iconic arch-monument and a must-visit landmark by the Arabian Sea.", cost: 0 },
+            { city: "Mumbai", name: "Marine Drive", category: ["Nature", "Entertainment"], icon: "🌊", description: "Scenic promenade, perfect for evening walks and sunset views.", cost: 0 },
+            { city: "Mumbai", name: "Elephanta Caves", category: ["Historical", "Adventure"], icon: "🗿", description: "UNESCO World Heritage site with ancient rock-cut temples.", cost: 200 },
+            { city: "Pune", name: "Shaniwar Wada", category: ["Historical"], icon: "🏰", description: "18th-century fortification and palace in Pune.", cost: 50 },
+            { city: "Pune", name: "Sinhagad Fort", category: ["Historical", "Adventure", "Nature"], icon: "⛰️", description: "Hill fortress with panoramic views and trekking opportunities.", cost: 30 },
+            { city: "Nashik", name: "Trimbakeshwar Temple", category: ["Religious"], icon: "🛕", description: "One of the twelve Jyotirlingas, a sacred Hindu temple.", cost: 0 },
+            { city: "Nashik", name: "Sula Vineyards", category: ["Entertainment", "Nature"], icon: "🍇", description: "India's most popular winery with tours and tastings.", cost: 500 },
+        ];
+
+        const budgetMap = { Low: 800, Medium: 2000, High: 4000 };
+        const budgetTips = {
+            Low: ["Use local trains/buses for transport.", "Try street food and budget eateries.", "Look for hostels or budget hotels."],
+            Medium: ["Book 3-star hotels in advance.", "Use app-based cabs for convenience.", "Try local restaurants and guided tours."],
+            High: ["Opt for premium hotels and resorts.", "Hire private cabs for sightseeing.", "Enjoy fine dining and exclusive experiences."],
+        };
+        const categories = ["Religious", "Historical", "Nature", "Adventure", "Entertainment", "Beaches", "Wildlife"];
+
+        // ── Carousel ──────────────────────────────────────────────────────────────
+        function Carousel({ onExplore }) {
+            const [idx, setIdx] = useState(0);
+            const next = () => setIdx(i => (i + 1) % slides.length);
+            const prev = () => setIdx(i => (i - 1 + slides.length) % slides.length);
+
+            useEffect(() => {
+                const t = setInterval(next, 4500);
+                return () => clearInterval(t);
+            }, []);
+
+            return (
+                <div className="carousel-wrap">
+                    {slides.map((s, i) => (
+                        <div key={i} className={`carousel-slide${i === idx ? " active" : ""}`}>
+                            <img src={s.img} alt={s.title} />
+                            <div className="carousel-caption">
+                                <h1>{s.title}</h1>
+                                <p>{s.sub}</p>
+                            </div>
+                        </div>
+                    ))}
+                    <button className="carousel-btn prev" onClick={prev}><i className="fa fa-chevron-left" /></button>
+                    <button className="carousel-btn next" onClick={next}><i className="fa fa-chevron-right" /></button>
+                    <div className="carousel-dots">
+                        {slides.map((_, i) => (
+                            <div key={i} className={`dot${i === idx ? " active" : ""}`} onClick={() => setIdx(i)} />
+                        ))}
+                    </div>
+                    <button className="explore-btn" onClick={onExplore}><i className="fa fa-compass" style={{ marginRight: 8 }} />Explore Cities</button>
+                </div>
+            );
+        }
+
+        // ── Navbar ────────────────────────────────────────────────────────────────
+        function Navbar({ onPlan }) {
+            const [open, setOpen] = useState(false);
+            return (
+                <nav>
+                    <div className="logo"><i className="fa fa-map-location-dot" /> Maharashtra Tourism</div>
+                    <div className="nav-right">
+                        <div className="nav-search">
+                            <i className="fa fa-magnifying-glass" />
+                            <input type="text" placeholder="Search places..." />
+                        </div>
+                        <button className="plan-btn" onClick={onPlan}><i className="fa fa-route" /> Plan Your Trip</button>
+                        <button className="nav-icon-btn" title="Mail" onClick={() => window.location.href = "mailto:"}>
+                            <i className="fa fa-envelope" />
+                        </button>
+                        <button className="nav-icon-btn" title="Instagram" onClick={() => window.open("https://instagram.com", "_blank")}>
+                            <i className="fab fa-instagram" />
+                        </button>
+                        <div className="dots-wrap">
+                            <button className="nav-icon-btn" onClick={() => setOpen(o => !o)}>
+                                <i className="fa fa-ellipsis-vertical" />
+                            </button>
+                            {open && (
+                                <div className="dropdown">
+                                    <a href="#" onClick={() => setOpen(false)}>About</a>
+                                    <a href="#" onClick={() => setOpen(false)}>Contact</a>
+                                    <a href="#" onClick={() => setOpen(false)}>Help</a>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </nav>
+            );
+        }
+
+        // ── Intro ─────────────────────────────────────────────────────────────────
+        function Intro() {
+            return (
+                <>
+                    <section className="intro">
+                        <h2>Welcome to Maharashtra</h2>
+                        <p>Discover the diverse beauty of Maharashtra – a state known for its rich history, vibrant cities, scenic landscapes, and spiritual destinations.</p>
+                        <p>Use our smart trip planner to customize your journey based on your interests, duration, and budget.</p>
+                    </section>
+                    <div className="stats-bar">
+                        <div className="stat"><div className="stat-num">15+</div><div className="stat-label">Cities</div></div>
+                        <div className="stat"><div className="stat-num">50+</div><div className="stat-label">Tourist Spots</div></div>
+                        <div className="stat"><div className="stat-num">7</div><div className="stat-label">Categories</div></div>
+                        <div className="stat"><div className="stat-num">3</div><div className="stat-label">Budget Options</div></div>
+                    </div>
+                </>
+            );
+        }
+
+        // ── Planner Form ──────────────────────────────────────────────────────────
+        function TripPlanner({ plannerRef, onResults }) {
+            const [city, setCity] = useState("");
+            const [days, setDays] = useState(3);
+            const [budget, setBudget] = useState("");
+            const [selected, setSelected] = useState([]);
+
+            const toggleCat = cat => setSelected(s => s.includes(cat) ? s.filter(c => c !== cat) : [...s, cat]);
+
+            const handleSubmit = e => {
+                e.preventDefault();
+                let filtered = placesData.filter(p => p.city === city && (selected.length === 0 || p.category.some(c => selected.includes(c))));
+                if (!filtered.length) filtered = placesData.filter(p => p.city === city);
+                onResults({ city, days, budget, selected, filtered });
+            };
+
+            return (
+                <section className="trip-planner" ref={plannerRef} id="trip-planner">
+                    <h2><i className="fa fa-compass" style={{ color: "var(--accent)", marginRight: 10 }} />Plan Your Trip</h2>
+                    <form className="planner-form" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label>Select City</label>
+                            <select value={city} onChange={e => setCity(e.target.value)} required>
+                                <option value="">-- Choose City --</option>
+                                {["Mumbai", "Pune", "Nashik"].map(c => <option key={c}>{c}</option>)}
+                            </select>
+                        </div>
+                        <div className="form-group" style={{ flexBasis: "100%" }}>
+                            <label>Tourism Categories</label>
+                            <div className="checkbox-group">
+                                {categories.map(cat => (
+                                    <label key={cat}>
+                                        <input type="checkbox" checked={selected.includes(cat)} onChange={() => toggleCat(cat)} />
+                                        {cat}
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label>Number of Days</label>
+                            <input type="number" min="1" max="14" value={days} onChange={e => setDays(+e.target.value)} required />
+                        </div>
+                        <div className="form-group">
+                            <label>Budget</label>
+                            <select value={budget} onChange={e => setBudget(e.target.value)} required>
+                                <option value="">-- Select Budget --</option>
+                                {["Low", "Medium", "High"].map(b => <option key={b}>{b}</option>)}
+                            </select>
+                        </div>
+                        <div className="form-group" style={{ flexBasis: "100%" }}>
+                            <button type="submit" className="submit-btn"><i className="fa fa-wand-magic-sparkles" /> Get Recommendations</button>
+                        </div>
+                    </form>
+                </section>
+            );
+        }
+
+        // ── Place Card ────────────────────────────────────────────────────────────
+        function PlaceCard({ place }) {
+            return (
+                <div className="card">
+                    <div className="card-img-placeholder">{place.icon}</div>
+                    <div className="card-content">
+                        <h3>{place.name}</h3>
+                        <p>{place.description}</p>
+                        <div>
+                            {place.category.map(c => <span key={c} className="tag">{c}</span>)}
+                            <span className="cost-tag" style={{ marginLeft: 6 }}>{place.cost === 0 ? "Free" : `₹${place.cost}`}</span>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ── Recommendations ───────────────────────────────────────────────────────
+        function Recommendations({ results, recRef }) {
+            if (!results) return null;
+            const { city, days, budget, selected, filtered } = results;
+
+            const itinerary = Array.from({ length: days }, () => []);
+            filtered.forEach((p, i) => itinerary[i % days].push(p));
+            const approxCost = budgetMap[budget] * days;
+
+            return (
+                <section className="recommendations" ref={recRef}>
+                    <div className="rec-header">
+                        <h2><i className="fa fa-map-pin" style={{ color: "var(--accent)", marginRight: 10 }} />Recommended Places in {city}</h2>
+                        <p>Categories: {selected.length ? selected.join(", ") : "All"} &nbsp;|&nbsp; {days} day{days > 1 ? "s" : ""} &nbsp;|&nbsp; {budget} budget</p>
+                    </div>
+
+                    <div className="cards">
+                        {filtered.map((p, i) => <PlaceCard key={i} place={p} />)}
+                    </div>
+
+                    <div className="itinerary-section">
+                        <h3><i className="fa fa-calendar-days" style={{ color: "var(--accent)", marginRight: 8 }} />Day-wise Itinerary</h3>
+                        {itinerary.map((day, i) => (
+                            <div className="itinerary-day" key={i}>
+                                <div className="day-badge">{i + 1}</div>
+                                <div className="day-places">{day.length ? day.map(p => p.name).join(" → ") : "Rest / Leisure Day"}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="budget-section" style={{ marginTop: 24 }}>
+                        <div className="budget-tips">
+                            <h4><i className="fa fa-lightbulb" style={{ marginRight: 6 }} />Budget Tips ({budget})</h4>
+                            <ul>{budgetTips[budget].map((t, i) => <li key={i}>{t}</li>)}</ul>
+                        </div>
+                        <div className="cost-card">
+                            <div style={{ fontSize: "0.95rem", opacity: 0.8, marginBottom: 6 }}>Estimated Total Cost</div>
+                            <div className="amount">₹{approxCost.toLocaleString()}</div>
+                            <div className="cost-label">for {days} day{days > 1 ? "s" : ""}, per person</div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ── City Selection Page ────────────────────────────────────────────────────
+        const cityImages = {
+            Mumbai: "../images/mumbai.jpg",
+            Pune: "../images/shaniwarwada.jpg",
+            Nashik: "../images/trimbak.jpg",
+        };
+        function CitySelectionPage({ onSelect, onBack }) {
+            return (
+                <div className="city-page page">
+                    <button className="back-btn" onClick={onBack}><i className="fa fa-arrow-left" style={{ marginRight: 6 }} />Back</button>
+                    <h2><i className="fa fa-city" style={{ color: "var(--accent)", marginRight: 10 }} />Choose a City</h2>
+                    <div className="city-cards">
+                        {["Mumbai", "Pune", "Nashik"].map(city => (
+                            <div key={city} className="city-card" onClick={() => onSelect(city)}>
+                                <img src={cityImages[city]} alt={city} onError={e => e.target.style.display = "none"} />
+                                <div className="city-card-name">{city}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // ── City Details Page ─────────────────────────────────────────────────────
+        function CityDetailsPage({ city, onBack }) {
+            const places = placesData.filter(p => p.city === city);
+            return (
+                <div className="city-page page">
+                    <button className="back-btn" onClick={onBack}><i className="fa fa-arrow-left" style={{ marginRight: 6 }} />Back</button>
+                    <h2><i className="fa fa-map-pin" style={{ color: "var(--accent)", marginRight: 10 }} />Explore {city}</h2>
+                    <div className="cards" style={{ maxWidth: 1100, margin: "0 auto", textAlign: "left" }}>
+                        {places.map((p, i) => <PlaceCard key={i} place={p} />)}
+                    </div>
+                </div>
+            );
+        }
+
+        // ── Footer ────────────────────────────────────────────────────────────────
+        function Footer() {
+            return (
+                <footer>
+                    <div className="footer-links">
+                        <a href="#trip-planner"><i className="fa fa-route" /> Plan Trip</a>
+                        <a href="#"><i className="fa fa-circle-info" /> About</a>
+                        <a href="#"><i className="fa fa-envelope" /> Contact</a>
+                    </div>
+                    <p>&copy; 2026 Maharashtra Tourism. All rights reserved.</p>
+                    <p style={{ fontSize: "0.8rem", opacity: 0.6 }}>Built with React &amp; ❤️</p>
+                </footer>
+            );
+        }
+
+        // ── App ───────────────────────────────────────────────────────────────────
+        function App() {
+            const [results, setResults] = useState(null);
+            const [page, setPage] = useState("home");
+            const [selectedCity, setSelectedCity] = useState(null);
+            const plannerRef = useRef(null);
+            const recRef = useRef(null);
+
+            const scrollToPlanner = () => plannerRef.current?.scrollIntoView({ behavior: "smooth" });
+            const handleResults = data => {
+                setResults(data);
+                setTimeout(() => recRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
+            };
+
+            if (page === "cities") return (
+                <>
+                    <Navbar onPlan={() => { setPage("home"); setTimeout(scrollToPlanner, 100); }} />
+                    <CitySelectionPage onSelect={city => { setSelectedCity(city); setPage("details"); }} onBack={() => setPage("home")} />
+                    <Footer />
+                </>
+            );
+
+            if (page === "details") return (
+                <>
+                    <Navbar onPlan={() => { setPage("home"); setTimeout(scrollToPlanner, 100); }} />
+                    <CityDetailsPage city={selectedCity} onBack={() => setPage("cities")} />
+                    <Footer />
+                </>
+            );
+
+            return (
+                <>
+                    <Navbar onPlan={scrollToPlanner} />
+                    <Carousel onExplore={() => setPage("cities")} />
+                    <main>
+                        <Intro />
+                        <TripPlanner plannerRef={plannerRef} onResults={handleResults} />
+                        <Recommendations results={results} recRef={recRef} />
+                    </main>
+                    <Footer />
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+</body>
+
+</html>
