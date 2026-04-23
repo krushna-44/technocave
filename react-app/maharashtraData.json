@@ -894,35 +894,6 @@
             "location": "Nashik, Maharashtra"
           }
         ],
-        "beaches": [
-          {
-            "name": "Daman Beach",
-            "short_description": "A popular coastal getaway near Nashik.",
-            "long_description": "Daman is a Union Territory located about 3 hours away from Nashik. Devka and Jampore are its most famous beaches. Daman is known for its Portuguese heritage, forts, and churches. The beaches are popular for weekend trips from Nashik and Gujarat. One can enjoy sea views, horse rides, and fresh seafood. The relaxed atmosphere and the availability of local drinks attract many visitors. It is a perfect place for a quick beach holiday.",
-            "famous_for": ["Sea views", "Portuguese history", "Weekend trips"],
-            "tags": ["Beaches"],
-            "icon": "🏖️",
-            "location": "Daman (near Nashik)"
-          },
-          {
-            "name": "Bordi Beach",
-            "short_description": "A peaceful beach known for Chikoo orchards.",
-            "long_description": "Bordi Beach is located in the Palghar district, easily accessible from Nashik. It is a very clean and quiet beach with shallow waters. The beach is famous for the Chikoo orchards that line the shore. It is a great place for a peaceful getaway away from the city crowds. Visitors can enjoy local Parsi and Maharashtrian food. The beach is safe for swimming. It is a popular destination for those looking for natural beauty and calm.",
-            "famous_for": ["Chikoo orchards", "Clean sand", "Quiet atmosphere"],
-            "tags": ["Beaches"],
-            "icon": "🏖️",
-            "location": "Palghar district, Maharashtra"
-          },
-          {
-            "name": "Gorai Beach",
-            "short_description": "A quiet and clean beach near the Global Vipassana Pagoda.",
-            "long_description": "Gorai Beach is situated in the north-western part of Mumbai. It is accessible by ferry from Borivali or by road. The beach is relatively cleaner and quieter compared to Juhu. It is popular for weekend picnics and beach house stays. The massive Global Vipassana Pagoda is visible from the beach. It offers a calm environment with palm trees lining the coast. It is a great getaway within the city.",
-            "famous_for": ["Weekend stays", "Clean sand", "Pagoda view"],
-            "tags": ["Beaches"],
-            "icon": "🏖️",
-            "location": "Gorai, Mumbai"
-          }
-        ],
         "wildlife": [
           {
             "name": "Nandur Madhmeshwar Bird Sanctuary",

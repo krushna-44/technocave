@@ -13,21 +13,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
-      --primary: #0a0a0a;
-      --primary-blue: #1a56db;
-      --accent: #f59e0b;
-      --accent-hover: #d97706;
-      --bg: #f8f9fc;
-      --card-bg: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --radius: 12px;
-      --radius-lg: 20px;
-      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
-      --shadow-hover: 0 8px 30px rgba(0,0,0,0.14);
-      --font: 'Montserrat', Arial, sans-serif;
-    }
+  /* Warm neutral background + deep ocean accent + gold detail */
+  --primary: #0f1e32;          /* deep navy for headings, strong text */
+  --primary-blue: #01696f;     /* ocean teal used for highlights and CTAs */
+  --accent: #f9b233;           /* gold */
+  --accent-hover: #e09e1b;     /* darker gold on hover */
+
+  --bg: #f7f6f2;               /* warm off‑white background */
+  --card-bg: #ffffff;          /* cards stay pure white */
+  --text: #1e293b;             /* dark slate text */
+  --muted: #64748b;            /* muted text */
+  --border: #e2e8f0;           /* soft border */
+
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 1px 3px rgba(15, 23, 42, 0.06),
+            0 8px 30px rgba(15, 23, 42, 0.08);
+  --shadow-hover: 0 16px 40px rgba(15, 23, 42, 0.16);
+
+  --font: 'Montserrat', Arial, sans-serif;
+}
 
     [data-theme="dark"] {
       --bg: #0d1117;
@@ -90,30 +95,31 @@
     }
 
     nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 6vw;
-      height: 70px;
-      background: rgba(15, 30, 50, 0.92);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-      border-bottom: 1px solid rgba(249,178,51,0.15);
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 6vw;
+  height: 70px;
+  background: rgba(10, 20, 35, 0.92);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 6px 30px rgba(15,23,42,0.6);
+  border-bottom: 1px solid rgba(249,178,51,0.18);
+}
+
     .logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: 3px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-transform: uppercase;
-    }
-    .logo i { color: #f9b233; font-size: 1.3rem; }
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.25em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+}
+.logo i { color: var(--accent); font-size: 1.3rem; }
     .nav-right {
       display: flex;
       align-items: center;
@@ -141,43 +147,45 @@
     }
     .nav-search input::placeholder { color: var(--muted); }
     .nav-search i { color: var(--muted); font-size: 0.9rem; }
-    .plan-btn {
-      background: linear-gradient(135deg, #f9b233, #e09e1b);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 26px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      cursor: pointer;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 15px rgba(249,178,51,0.4);
-      transition: background 0.2s, transform 0.15s;
-      white-space: nowrap;
-      font-family: var(--font);
-    }
-    .plan-btn:hover {
-      transform: translateY(-1px);
-    }
     .nav-icon-btn {
-      background: #f1f5f9;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 8px;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 0.95rem;
-      transition: all 0.2s;
-    }
-    .nav-icon-btn:hover {
-      background: var(--primary-blue);
-      color: #fff;
-      border-color: var(--primary-blue);
-    }
+  background: rgba(248, 250, 252, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  color: #e2e8f0;
+  border-radius: 999px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+.nav-icon-btn:hover {
+  background: var(--accent);
+  color: #0f172a;
+  border-color: var(--accent);
+}
+
+.plan-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: #0f172a;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 28px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.12em;
+  box-shadow: 0 8px 24px rgba(249,178,51,0.5);
+  transition: transform 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+  font-family: var(--font);
+}
+.plan-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px rgba(249,178,51,0.65);
+}
     .dots-wrap {
       position: relative;
     }
@@ -220,6 +228,25 @@
       overflow: hidden;
       background: #0f172a;
     }
+    .carousel-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        rgba(0,0,0,0.65) 0%,
+        rgba(0,0,0,0.35) 40%,
+        rgba(0,0,0,0.05) 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+    .carousel-caption {
+      position: absolute;
+      left: 8vw;
+      bottom: 140px;
+      z-index: 2; /* ensure above overlay */
+    }
     .carousel-slide {
       position: absolute;
       inset: 0;
@@ -235,35 +262,25 @@
       filter: brightness(0.5) saturate(1.2);
       display: block;
     }
-    .carousel-caption {
-      position: absolute;
-      left: 8vw;
-      bottom: 140px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 0;
-      background: transparent;
-      backdrop-filter: none;
-      border-radius: 0;
-    }
     .carousel-caption h1 {
-      font-size: 3.5rem;
-      font-weight: 900;
-      color: #ffffff;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-      max-width: 600px;
-    }
+  font-size: 3.5rem;
+  font-weight: 900;
+  font-family: 'Playfair Display', Georgia, serif;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  letter-spacing: 0.2em;
+  margin-bottom: 12px;
+  max-width: 620px;
+}
+
     .carousel-caption p {
-      font-size: 1.2rem;
-      color: rgba(255,255,255,0.85);
-      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
-      margin: 0 0 28px;
-      max-width: 480px;
-    }
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  margin: 0 0 28px;
+  max-width: 480px;
+}
     .carousel-btn {
       position: absolute;
       top: 50%;
@@ -483,12 +500,12 @@
       padding-top: 56px;
     }
     .rec-header h2 {
-      font-size: 2.2rem;
-      color: #1e3a5c;
-      margin-bottom: 8px;
-      font-weight: 800;
-      position: relative;
-    }
+  font-size: 2.2rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+  font-weight: 800;
+  position: relative;
+}
     .rec-header p {
       color: var(--muted);
       font-size: 0.95rem;
@@ -531,11 +548,11 @@
     }
     .card-content { padding: 18px; flex: 1; }
     .card-content h3 {
-      margin: 0 0 8px;
-      font-size: 1.1rem;
-      color: #1e3a5c;
-      font-weight: 700;
-    }
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  color: var(--primary);
+  font-weight: 700;
+}
     .card-content p {
       color: var(--muted);
       font-size: 0.88rem;
@@ -838,9 +855,9 @@
 
     // ── Data ──────────────────────────────────────────────────────────────────
     const slides = [
-      { img: "../images/mumbai.jpg", title: "Gateway of India", sub: "Iconic monument by the Arabian Sea, Mumbai" },
-      { img: "../images/marine_drive.jpg", title: "Marine Drive", sub: "Scenic promenade, perfect for sunset walks" },
-      { img: "../images/shaniwarwada.jpg", title: "Shaniwar Wada", sub: "Historic fortification in Pune" },
+      { img: "../images/Gateway of India_.jpg", title: "Gateway of India", sub: "Iconic monument by the Arabian Sea, Mumbai" },
+      { img: "../images/Marine drive_(1).jpg", title: "Marine Drive", sub: "Scenic promenade, perfect for sunset walks" },
+      { img: "../images/shaniwarwada.webp", title: "Shaniwar Wada", sub: "Historic fortification in Pune" },
       { img: "../images/trimbak.jpg", title: "Trimbakeshwar Temple", sub: "One of the twelve Jyotirlingas, Nashik" },
     ];
 
@@ -861,6 +878,128 @@
       High: ["Opt for premium hotels and resorts.", "Hire private cabs for sightseeing.", "Enjoy fine dining and exclusive experiences."],
     };
     const categories = ["Religious", "Historical", "Nature", "Adventure", "Entertainment", "Beaches", "Wildlife"];
+
+    // ── Place Images (replace demo URLs with real ones) ────────────────────────
+    const placeImages = {
+      "Gateway of India":        "../gate.jpg",
+      "Elephanta Caves":         "../images/Elephanta caves_(1).jpg",
+      "Shaniwar Wada":           "../images/shaniwarwada.webp",
+      "Sinhagad Fort":           "../images/Sinhagad Fort.jpg",
+      "Trimbakeshwar Temple":    "../images/trimbak.jpg",
+      "Prozone Mall":"../images/Prozone mall.jpg",
+      "Local Markets":"../images/Local market_.jpg",
+      "Ekvira Devi Temple":"../images/Ekvira devi temple_.jpg",
+      "Swaminarayan Temple":"../images/Swaminarayan Mandir.jpg",
+      "Laling Fort":"../images/Laling fort_(1).jpg",
+      "Songir Fort":"../images/songir fort.jpg",
+      "Toranmal Hill Station":"../images/toranmal hill station_(1).jpg",
+      "Lotus Lake Toranmal":"../images/Lotus lake toranmal.jpg",
+      "Toranmal Trek":"../images/Toranmal trek.jpg",
+      "Laling Fort Trek":"../images/Laling Trek_.jpg",
+      "Yawal Wildlife Sanctuary":"../images/yawal-wildlife-sanctuary.jpg",
+      "Tarkarli Beach":"../images/Tarkarli beach_.jpg",
+      "Ganpatipule Beach":"../images/Ganapati pule beach_.jpg",
+      "Alibaug Beach":"../images/Alibag_Beach.jpg",
+      "Harihareshwar Beach":"../images/Harihareshwar beach_(1).jpg",
+      "Ganpatipule Temple":"../images/Ganapati pule_.jpg",
+      "Kunkeshwar Temple":"../images/kunkeshwar.jpg",
+      "Sindhudurg Fort":"../images/Sindhdurg_(1).jpg",
+      "Murud Janjira Fort":"../images/Murud janjira_(1).jpg",
+      "Scuba Diving Tarkarli":"../images/Scuba diving tarkarli_.jpg",
+      "Velas Beach":"../images/Velas Beach.jpg",
+      "Amboli Hill Station":"../images/Amboli-Waterfalls-.jpg",
+      "Beach Resorts and Water Activities":"../images/Water activities_.png",
+      "Siddhivinayak Temple":"../images/Siddhivinayak temple_(1).jpg",
+      "ISKCON Temple Juhu":"../images/ISKON_.jpg",
+      "Haji Ali Dargah":"../images/Haji ali dargah_.jpg",
+      "Mumbadevi Temple":"../images/Mumba devi_(1).jpg",
+      "Mahalaxmi Temple":"../images/Mahalaxmi_.jpg",
+      "Walkeshwar Temple":"../images/Banganga tank_.jpg",
+      "Gateway of India":"../images/Gateway of India_.jpg",
+      "Asiatic Society":"../images/Asiatic society_.jpg",
+      "Elephanta Caves":"../images/Elephanta caves_(1).jpg",
+      "Banganga Tank":"../images/Banganga tank_.jpg",
+      "Sion Fort":"../images/Sion-Fort-.png",
+      "Sanjay Gandhi National Park":"../images/sanjay gandhi national park_.jpg",
+      "Marine Drive":"../images/marinedrive.jpg",
+      "Shivaji Park":"../images/Shivaji park_.jpg",
+      "Sula Vineyards":          "../images/Sula vineyards_.jpg",
+      "Kapaleshwar" :           "../images/Kapaleshwar_.jpg",
+      "Navshya Ganpati":        "../images/Navshay ganpati_.jpg",
+      "Zankars Adventure Park":"../images/Zonkar adventure park_.jpg",
+      "Kalaram Temple":"../images/Kalaram temple_.jpg",
+      "Someshwar Temple":"../images/Someshwar_.jpg",
+      "Trimbakeshwar":"../images/Trambakeshwar_(1).jpg",
+      "Ramkund":"../images/Ram kund.jpg",
+      "Sita Caves":"../images/Sita_Gufaa.jpg",
+      "Coin Museum":"../images/coin-museum-.jpg",
+      "Pandavleni Caves":"../images/Pandavleni caves(1).jpg",
+      "Anjaneri Hills":"../images/Anjneri hills_.jpg",
+      "Dudh Sagar Falls":"../images/Dudh sagar_.jpg",
+      "Gangapur Dam":"../images/Gangapur dam.webp",
+      "Harihar Fort":"../images/Harihar gad.jpg",
+      "Anjaneri Trekking":"../images/Anjneri terk.jpg",
+      "Rappelling Nashik":"../images/Rappelling_.jpg",
+      "Blue Lagoon Adventure Park":"../images/Anjneri terk.jpg",
+      "City Centre Mall":"../images/City centre mall_.jpg",
+      "Sula Tours":"../images/Sula yards.jpg",
+      "INOX Nashik":"../images/INOX_.jpg",
+      "Goda Park":"../images/Goda park.jpg",
+      "Nandur Madhmeshwar Bird Sanctuary":"../images/Nandur madhmeshwar bird sanctuary_.png",
+      "Grishneshwar Temple":"../images/Grishneshwar_(1).jpg",
+      "Bhadra Maruti Temple":"../images/Bhadra maruti_(1).jpg",
+      "Ajanta Caves":"../images/Ajanta caves_.jpg",
+      "Ellora Caves":"../images/Ellora_.jpg",
+      
+      "Bibi Ka Maqbara":"../images/Bibi ka maqbara_.jpg",
+      "Daulatabad Fort":"../images/Daulatabad fort_(1).jpg",
+      "Salim Ali Lake":"../images/Salim ali lake.jpg",
+      "Siddharth Garden":"../images/Siddharth Garden_.jpg",
+      "Daulatabad Fort Trek":"../images/Daulatabad trek.jpg",
+      "Ellora Trekking":"../images/Ellora exploration_(1).jpg",
+      "Gautala Wildlife Sanctuary":"../images/Gautala sanctuary_.jpg",
+      
+      "Kanheri Caves Trek":"../images/Kanheri caves trek.jpg",
+      "Della Adventure Park":"../images/Della adventure park_.webp",
+      "Juhu Beach Water Sports":"../images/Juju beach water activities_.jpg",
+      "EsselWorld":"../images/Essel world_.jpg",
+      "Film City":"../images/Film city_.jpg",
+      "Nehru Planetarium":"../images/Nehru planetarium_.jpg",
+      "Royal Opera House":"../images/Royal Opera house_.jpg",
+      "Regal Cinema":"../images/Regal cinema_.jpg",
+      "Juhu Beach":"../images/Juhu beach_.jpg",
+      "Girgaon Chowpatty":"../images/Girgaon Chowpatty_.jpg",
+      "Gorai Beach":"../images/goroi.jpg",
+      "Manori Beach":"../images/Manori_.jpg",
+      "Silver Beach":"../images/silver-beach-.jpg",
+      "Sanjay Gandhi National Park Safari":"../images/sanjay gandhi national park_.jpg",
+      "Veermata Jijabai Bhosale Udyan":"../images/sanjay gandhi national park_.jpg",
+      "Thane Creek Flamingo Sanctuary":"../images/Nandur madhmeshwar bird sanctuary_.png",
+      "Taraporewala Aquarium":"../images/Marine drive_.jpg",
+      
+      "Dagdusheth Halwai Ganpati Temple":"../images/Dagdusheth Ganpati.jpg",
+      "Parvati Hill Temple":"../images/Parvati Hill Temple.jpg",
+      "Shaniwar Wada":"../images/shaniwarwada.webp",
+      "Aga Khan Palace":"../images/Aga Khan Palace.jpg",
+      "Mulshi Dam":"../images/Mulshi Dam.jpg",
+      "Khadakwasla Dam":"../images/Khadakwasla Dam.jpg",
+      "Rajmachi Trek":"../images/Harihar gad.jpg",
+      "Pawna Lake Camping":"../images/Mulshi Dam.jpg",
+      "Phoenix Marketcity":"../images/Phoenix Market City.webp",
+      "Rajiv Gandhi Zoological Park":"../images/Rajiv Gandhi Zoological Park_.jpg",
+      "Bhigwan Bird Sanctuary":"../images/Bhigwan Bird Sanctury.jpg",
+      "Kaas Plateau":"../images/Kaas Plateau.jpg",
+      "Sandhan Valley":"../images/sandhan.png",
+      "Bhandardara":"../images/Bhandardara.jpg",
+      // "":"../images/.jpg",
+      // "":"../images/.jpg",
+      // "":"../images/.jpg",
+      // "":"../images/.jpg",
+      // "":"../images/.jpg",
+
+      
+  
+    };
 
     // ── Carousel ──────────────────────────────────────────────────────────────
     function Carousel({ onExplore }) {
@@ -923,7 +1062,7 @@
     }
 
     // ── Navbar ────────────────────────────────────────────────────────────────
-    function Navbar({ onPlan, placesData = [], onPlaceClick, onCityClick, darkMode, toggleDark }) {
+    function Navbar({ onPlan, placesData = [], onPlaceClick, onCityClick, darkMode, toggleDark, trolleyCount, onTrolleyClick }) {
       const [open, setOpen] = useState(false);
       const [query, setQuery] = useState("");
       const [searchResults, setSearchResults] = useState([]);
@@ -931,7 +1070,30 @@
 
       return (
         <nav>
-          <div className="logo"><i className="fa fa-map-location-dot" /> RoamGenie</div>
+          <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
+            <div className="logo"><i className="fa fa-map-location-dot" /> RoamGenie</div>
+            <button onClick={onTrolleyClick} title="My Trip Trolley" style={{
+              position: "relative", background: "rgba(249,178,51,0.12)",
+              border: "1.5px solid rgba(249,178,51,0.5)", color: "#f9b233",
+              borderRadius: "999px", width: "40px", height: "40px",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              cursor: "pointer", fontSize: "1rem", transition: "all 0.2s"
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = "#f9b233"; e.currentTarget.style.color = "#0f172a"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(249,178,51,0.12)"; e.currentTarget.style.color = "#f9b233"; }}>
+              <i className="fa fa-basket-shopping" />
+              {trolleyCount > 0 && (
+                <span style={{
+                  position: "absolute", top: "-6px", right: "-6px",
+                  background: "#ef4444", color: "#fff", borderRadius: "999px",
+                  fontSize: "0.65rem", fontWeight: "800",
+                  minWidth: "18px", height: "18px",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  padding: "0 4px"
+                }}>{trolleyCount}</span>
+              )}
+            </button>
+          </div>
           <div className="nav-right">
             <div style={{ position: "relative" }}>
               <div className="nav-search">
@@ -1254,24 +1416,48 @@
     }
 
     // ── Place Card ────────────────────────────────────────────────────────────
-    function PlaceCard({ place, onPlaceClick }) {
+    function PlaceCard({ place, onPlaceClick, onAddToTrolley, trolleyItems = [] }) {
+      const img = place.image || placeImages[place.name];
+      const inTrolley = trolleyItems.some(c => c.name === place.name && c.city === place.city);
       return (
-        <div className="card" onClick={() => onPlaceClick && onPlaceClick(place)}>
-          <div className="card-img-placeholder">{place.icon}</div>
-          <div className="card-content">
-            <h3>{place.name}</h3>
-            <p>{place.description}</p>
-            <div>
-              {place.category.map(c => <span key={c} className="tag">{c}</span>)}
-              <span className="cost-tag" style={{ marginLeft: 6 }}>{place.cost === 0 ? "Free" : `₹${place.cost}`}</span>
+        <div className="card">
+          <div onClick={() => onPlaceClick && onPlaceClick(place)} style={{ cursor: "pointer" }}>
+            {img
+              ? <img src={img} alt={place.name} style={{ width: "100%", height: "200px", objectFit: "cover", display: "block" }} />
+              : <div className="card-img-placeholder">{place.icon}</div>
+            }
+            <div className="card-content">
+              <h3>{place.name}</h3>
+              <p>{place.description}</p>
+              <div>
+                {place.category.map(c => <span key={c} className="tag">{c}</span>)}
+                <span className="cost-tag" style={{ marginLeft: 6 }}>{place.cost === 0 ? "Free" : `₹${place.cost}`}</span>
+              </div>
             </div>
           </div>
+          {onAddToTrolley && (
+            <div style={{ padding: "0 18px 16px" }}>
+              <button onClick={() => onAddToTrolley(place)} style={{
+                width: "100%", padding: "9px",
+                background: inTrolley ? "#dcfce7" : "var(--primary-blue)",
+                color: inTrolley ? "#15803d" : "#fff",
+                border: inTrolley ? "1.5px solid #86efac" : "none",
+                borderRadius: "8px", fontWeight: "700", fontSize: "0.85rem",
+                cursor: inTrolley ? "default" : "pointer", fontFamily: "var(--font)",
+                transition: "all 0.2s", display: "flex", alignItems: "center",
+                justifyContent: "center", gap: "7px"
+              }}>
+                <i className={inTrolley ? "fa fa-check" : "fa fa-basket-shopping"} />
+                {inTrolley ? "Added to Trolley" : "Add to Trolley"}
+              </button>
+            </div>
+          )}
         </div>
       );
     }
 
     // ── Recommendations ───────────────────────────────────────────────────────
-    function Recommendations({ results, recRef, onPlaceClick }) {
+    function Recommendations({ results, recRef, onPlaceClick, onAddToTrolley, trolleyItems }) {
       if (!results) return null;
       const { city, days, budget, selected, filtered } = results;
 
@@ -1288,7 +1474,7 @@
           </div>
 
           <div className="cards">
-            {filtered.map((p, i) => <PlaceCard key={i} place={p} onPlaceClick={onPlaceClick} />)}
+            {filtered.map((p, i) => <PlaceCard key={i} place={p} onPlaceClick={onPlaceClick} onAddToTrolley={onAddToTrolley} trolleyItems={trolleyItems} />)}
           </div>
 
           <div className="itinerary-section">
@@ -1499,17 +1685,155 @@
       );
     }
 
+    // ── Cart Page ─────────────────────────────────────────────────────────────
+    function TrolleyPage({ trolleyItems, onRemove, onBack, onClearTrolley }) {
+      const [days, setDays] = useState(Math.max(1, Math.ceil(trolleyItems.length / 3)));
+      const [budget, setBudget] = useState("Medium");
+      const [showPlan, setShowPlan] = useState(false);
+
+      const itinerary = Array.from({ length: days }, () => []);
+      trolleyItems.forEach((p, i) => itinerary[i % days].push(p));
+      const approxCost = budgetMap[budget] * days;
+
+      return (
+        <div className="city-page page" style={{ textAlign: "left", maxWidth: 1100, margin: "0 auto" }}>
+          <button className="back-btn" onClick={onBack}><i className="fa fa-arrow-left" style={{ marginRight: 6 }} />Back</button>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12, marginBottom: 8 }}>
+            <h2 style={{ margin: 0 }}><i className="fa fa-basket-shopping" style={{ color: "var(--accent)", marginRight: 10 }} />My Trip Trolley ({trolleyItems.length})</h2>
+            {trolleyItems.length > 0 && (
+              <button onClick={onClearTrolley} style={{
+                background: "#fee2e2", color: "#dc2626", border: "1.5px solid #fca5a5",
+                borderRadius: "8px", padding: "8px 18px", fontWeight: "700",
+                fontSize: "0.85rem", cursor: "pointer", fontFamily: "var(--font)"
+              }}><i className="fa fa-trash" style={{ marginRight: 6 }} />Clear All</button>
+            )}
+          </div>
+          <div style={{ width: "50px", height: "3px", background: "#f9b233", borderRadius: "2px", margin: "8px 0 28px" }} />
+
+          {trolleyItems.length === 0 ? (
+            <div style={{ textAlign: "center", padding: "80px 0", color: "var(--muted)" }}>
+              <div style={{ fontSize: "4rem", marginBottom: 16 }}>🧺</div>
+              <p style={{ fontSize: "1.1rem", fontWeight: 600 }}>Your trolley is empty. Add places from recommendations!</p>
+            </div>
+          ) : (
+            <>
+              <div className="cards">
+                {trolleyItems.map((p, i) => (
+                  <div key={i} className="card">
+                    {(p.image || placeImages[p.name])
+                      ? <img src={p.image || placeImages[p.name]} alt={p.name} style={{ width: "100%", height: "180px", objectFit: "cover" }} />
+                      : <div className="card-img-placeholder">{p.icon}</div>
+                    }
+                    <div className="card-content">
+                      <h3>{p.name}</h3>
+                      <p style={{ fontSize: "0.82rem", color: "var(--muted)" }}>{p.city}</p>
+                      <div>{p.category.map(c => <span key={c} className="tag">{c}</span>)}</div>
+                    </div>
+                    <div style={{ padding: "0 18px 16px" }}>
+                      <button onClick={() => onRemove(p)} style={{
+                        width: "100%", padding: "8px", background: "#fee2e2",
+                        color: "#dc2626", border: "1.5px solid #fca5a5",
+                        borderRadius: "8px", fontWeight: "700", fontSize: "0.82rem",
+                        cursor: "pointer", fontFamily: "var(--font)"
+                      }}><i className="fa fa-trash" style={{ marginRight: 6 }} />Remove</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ background: "var(--card-bg)", borderRadius: 16, padding: "28px 32px", boxShadow: "var(--shadow)", border: "1px solid var(--border)", marginTop: 32 }}>
+                <h3 style={{ margin: "0 0 20px", color: "var(--text)", fontWeight: 800 }}><i className="fa fa-calendar-days" style={{ color: "var(--accent)", marginRight: 8 }} />Generate My Trip Plan</h3>
+                <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginBottom: 20 }}>
+                  <div className="form-group" style={{ flex: "1 1 160px" }}>
+                    <label style={{ fontWeight: 700, fontSize: "0.82rem", textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--text)" }}>Number of Days</label>
+                    <input type="number" min="1" max="14" value={days} onChange={e => { setDays(+e.target.value); setShowPlan(false); }}
+                      style={{ padding: "10px 14px", borderRadius: 8, border: "1.5px solid var(--border)", fontFamily: "var(--font)", fontSize: "0.95rem", background: "var(--bg)", color: "var(--text)", outline: "none" }} />
+                  </div>
+                  <div className="form-group" style={{ flex: "1 1 160px" }}>
+                    <label style={{ fontWeight: 700, fontSize: "0.82rem", textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--text)" }}>Budget</label>
+                    <select value={budget} onChange={e => { setBudget(e.target.value); setShowPlan(false); }}
+                      style={{ padding: "10px 14px", borderRadius: 8, border: "1.5px solid var(--border)", fontFamily: "var(--font)", fontSize: "0.95rem", background: "var(--bg)", color: "var(--text)", outline: "none" }}>
+                      {["Low", "Medium", "High"].map(b => <option key={b}>{b}</option>)}
+                    </select>
+                  </div>
+                  <div className="form-group" style={{ flex: "1 1 160px", justifyContent: "flex-end" }}>
+                    <label style={{ opacity: 0 }}>_</label>
+                    <button onClick={() => setShowPlan(true)} style={{
+                      padding: "10px 28px", background: "var(--primary-blue)", color: "#fff",
+                      border: "none", borderRadius: 8, fontWeight: 700, fontSize: "0.95rem",
+                      cursor: "pointer", fontFamily: "var(--font)"
+                    }}><i className="fa fa-wand-magic-sparkles" style={{ marginRight: 7 }} />Generate Plan</button>
+                  </div>
+                </div>
+
+                {showPlan && (
+                  <>
+                    <div style={{ borderTop: "1px solid var(--border)", paddingTop: 20, marginTop: 4 }}>
+                      <h4 style={{ margin: "0 0 16px", color: "var(--text)", fontWeight: 800 }}>📅 Day-wise Itinerary</h4>
+                      {itinerary.map((day, i) => (
+                        <div className="itinerary-day" key={i}>
+                          <div className="day-badge">{i + 1}</div>
+                          <div className="day-places">{day.length ? day.map(p => p.name).join(" → ") : "Rest / Leisure Day"}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="budget-section" style={{ marginTop: 20 }}>
+                      <div className="budget-tips">
+                        <h4><i className="fa fa-lightbulb" style={{ marginRight: 6 }} />Budget Tips ({budget})</h4>
+                        <ul>{budgetTips[budget].map((t, i) => <li key={i}>{t}</li>)}</ul>
+                      </div>
+                      <div className="cost-card">
+                        <div style={{ fontSize: "0.95rem", opacity: 0.8, marginBottom: 6 }}>Estimated Total Cost</div>
+                        <div className="amount">₹{approxCost.toLocaleString()}</div>
+                        <div className="cost-label">for {days} day{days > 1 ? "s" : ""}, per person</div>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+      );
+    }
+
     // ── City Details Page ─────────────────────────────────────────────────────
-    function CityDetailsPage({ city, onBack, placesData, onPlaceClick }) {
+    function CityDetailsPage({ city, onBack, placesData, onPlaceClick, onAddToTrolley, trolleyItems }) {
+      const [activeTab, setActiveTab] = useState("All");
       if (!placesData || placesData.length === 0) return <p style={{ textAlign: "center", padding: "40px", color: "var(--muted)" }}>No places found</p>;
       const places = placesData.filter(p => p.city === city);
+      const tabs = ["All", ...categories.filter(cat =>
+        places.some(p => p.category.some(c => c.toLowerCase() === cat.toLowerCase()))
+      )];
+      const visible = activeTab === "All" ? places : places.filter(p =>
+        p.category.some(c => c.toLowerCase() === activeTab.toLowerCase())
+      );
       return (
         <div className="city-page page">
           <button className="back-btn" onClick={onBack}><i className="fa fa-arrow-left" style={{ marginRight: 6 }} />Back</button>
           <h2><i className="fa fa-map-pin" style={{ color: "var(--accent)", marginRight: 10 }} />Explore {city}</h2>
           <div style={{ width: "50px", height: "3px", background: "#f9b233", borderRadius: "2px", margin: "8px auto 24px" }} />
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px", marginBottom: "32px" }}>
+            {tabs.map(tab => (
+              <button key={tab} onClick={() => setActiveTab(tab)} style={{
+                padding: "8px 20px",
+                borderRadius: "999px",
+                border: "1.5px solid",
+                borderColor: activeTab === tab ? "var(--primary-blue)" : "var(--border)",
+                background: activeTab === tab ? "var(--primary-blue)" : "var(--card-bg)",
+                color: activeTab === tab ? "#fff" : "var(--text)",
+                fontWeight: "700",
+                fontSize: "0.82rem",
+                cursor: "pointer",
+                fontFamily: "var(--font)",
+                letterSpacing: "0.4px",
+                textTransform: "uppercase",
+                transition: "all 0.2s"
+              }}>{tab} {tab !== "All" && <span style={{ opacity: 0.7, fontWeight: 400 }}>({places.filter(p => p.category.some(c => c.toLowerCase() === tab.toLowerCase())).length})</span>}</button>
+            ))}
+          </div>
           <div className="cards" style={{ maxWidth: 1100, margin: "0 auto", textAlign: "left" }}>
-            {places.map((p, i) => <PlaceCard key={i} place={p} onPlaceClick={onPlaceClick} />)}
+            {visible.map((p, i) => <PlaceCard key={i} place={p} onPlaceClick={onPlaceClick} onAddToTrolley={onAddToTrolley} trolleyItems={trolleyItems} />)}
           </div>
         </div>
       );
@@ -1906,8 +2230,18 @@
       const [selectedPlace, setSelectedPlace] = useState(null);
       const [fromPage, setFromPage] = useState("home");
       const [darkMode, setDarkMode] = useState(false);
+      const [trolleyItems, settrolleyItems] = useState([]);
       const plannerRef = useRef(null);
       const recRef = useRef(null);
+
+      const addToTrolley = place => {
+        settrolleyItems(prev =>
+          prev.some(c => c.name === place.name && c.city === place.city) ? prev : [...prev, place]
+        );
+      };
+      const removeFromTrolley = place =>
+        settrolleyItems(prev => prev.filter(c => !(c.name === place.name && c.city === place.city)));
+      const clearTrolley = () => settrolleyItems([]);
 
       useEffect(() => {
         document.documentElement.setAttribute(
@@ -1958,38 +2292,36 @@
         setTimeout(() => recRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
       };
 
+      const navbarProps = {
+        onPlan: () => { setPage("home"); setTimeout(scrollToPlanner, 100); },
+        placesData,
+        onPlaceClick: place => { setSelectedPlace(place); window.scrollTo({ top: 0, behavior: "smooth" }); },
+        onCityClick: city => { setSelectedCity(city); setPage("details"); },
+        darkMode,
+        toggleDark: () => setDarkMode(d => !d),
+        trolleyCount: trolleyItems.length,
+        onTrolleyClick: () => { setSelectedPlace(null); setPage("trolley"); window.scrollTo({ top: 0 }); }
+      };
+
       if (selectedPlace) return (
         <>
-          <Navbar 
-            onPlan={scrollToPlanner}
-            placesData={placesData}
-            onPlaceClick={(p) => { setSelectedPlace(p); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-            onCityClick={(city) => { setSelectedCity(city); setPage("details"); }}
-            darkMode={darkMode}
-            toggleDark={() => setDarkMode(d => !d)}
-          />
-          <PlaceDetailPage
-            place={selectedPlace}
-            onBack={() => { setSelectedPlace(null); window.scrollTo({top:0}); }}
-          />
+          <Navbar {...navbarProps} onPlan={scrollToPlanner} />
+          <PlaceDetailPage place={selectedPlace} onBack={() => { setSelectedPlace(null); window.scrollTo({ top: 0 }); }} />
+          <Footer />
+        </>
+      );
+
+      if (page === "trolley") return (
+        <>
+          <Navbar {...navbarProps} />
+          <TrolleyPage trolleyItems={trolleyItems} onRemove={removeFromTrolley} onBack={() => setPage("home")} onClearTrolley={clearTrolley} />
           <Footer />
         </>
       );
 
       if (page === "cities") return (
         <>
-          <Navbar 
-            onPlan={() => { setPage("home"); setTimeout(scrollToPlanner, 100); }}
-            placesData={placesData}
-            onPlaceClick={(place) => {
-              setSelectedPlace(place);
-              setFromPage("home");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            onCityClick={(city) => { setSelectedCity(city); setPage("details"); }}
-            darkMode={darkMode}
-            toggleDark={() => setDarkMode(d => !d)}
-          />
+          <Navbar {...navbarProps} />
           <CitySelectionPage onSelect={city => { setSelectedCity(city); setPage("details"); }} onBack={() => setPage("home")} />
           <Footer />
         </>
@@ -1997,44 +2329,22 @@
 
       if (page === "details") return (
         <>
-          <Navbar 
-            onPlan={() => { setPage("home"); setTimeout(scrollToPlanner, 100); }}
-            placesData={placesData}
-            onPlaceClick={(place) => {
-              setSelectedPlace(place);
-              setFromPage("home");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            onCityClick={(city) => { setSelectedCity(city); setPage("details"); }}
-            darkMode={darkMode}
-            toggleDark={() => setDarkMode(d => !d)}
-          />
-          <CityDetailsPage city={selectedCity} onBack={() => setPage("cities")} placesData={placesData} onPlaceClick={setSelectedPlace} />
+          <Navbar {...navbarProps} />
+          <CityDetailsPage city={selectedCity} onBack={() => setPage("cities")} placesData={placesData} onPlaceClick={setSelectedPlace} onAddToTrolley={addToTrolley} trolleyItems={trolleyItems} />
           <Footer />
         </>
       );
 
       return (
         <>
-          <Navbar 
-            onPlan={scrollToPlanner} 
-            placesData={placesData}
-            onPlaceClick={(place) => {
-              setSelectedPlace(place);
-              setFromPage("home");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            onCityClick={(city) => { setSelectedCity(city); setPage("details"); }}
-            darkMode={darkMode}
-            toggleDark={() => setDarkMode(d => !d)}
-          />
+          <Navbar {...navbarProps} onPlan={scrollToPlanner} />
           <Carousel onExplore={() => setPage("cities")} />
           <main>
             <SiteBranding />
             <Intro />
             <HomeHighlights data={jsonData} onPlaceClick={setSelectedPlace} />
             <TripPlanner plannerRef={plannerRef} onResults={handleResults} placesData={placesData} />
-            <Recommendations results={results} recRef={recRef} onPlaceClick={setSelectedPlace} />
+            <Recommendations results={results} recRef={recRef} onPlaceClick={setSelectedPlace} onAddToTrolley={addToTrolley} trolleyItems={trolleyItems} />
             <Gallery />
             <WhyUs />
             <OurTeam />
